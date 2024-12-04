@@ -19,6 +19,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "ProyectoLogin"
+rootProject.name = "FOOD UPIICSA"
 include(":app")
- 

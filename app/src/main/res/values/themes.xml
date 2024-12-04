@@ -1,5 +1,34 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme -->
+    <style name="Theme.FOODUPIICSA.light" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Forzar modo claro -->
+        <item name="android:forceDarkAllowed">false</item>
 
-    <style name="Theme.ProyectoLogin" parent="android:Theme.Material.Light.NoActionBar" />
+        <!-- Primary brand color -->
+        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorOnPrimary">@color/white</item>
+
+        <!-- Secondary brand color -->
+        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondaryVariant">@color/teal_700</item>
+        <item name="colorOnSecondary">@color/black</item>
+
+        <!-- Status bar color -->
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+
+        <!-- Customize your theme here -->
+    </style>
+
+    <!-- No Action Bar Theme -->
+    <style name="Theme.FOODUPIICSA.NoActionBar" parent="Theme.FOODUPIICSA">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <!-- AppBar Overlay -->
+    <style name="Theme.FOODUPIICSA.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <!-- Popup Overlay -->
+    <style name="Theme.FOODUPIICSA.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

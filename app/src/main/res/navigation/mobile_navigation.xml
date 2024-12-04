@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.example.foodupiicsa.ui.home.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/nav_comida_diaria"
+        android:name="com.example.foodupiicsa.ui.ComidaDiaria.ComidaDiariaFragment"
+        android:label="@string/comida_diaria"
+        tools:layout="@layout/fragment_comida_diaria" />
+
+    <fragment
+        android:id="@+id/nav_favoritos"
+        android:name="com.example.foodupiicsa.ui.Favoritos.FavoritosFragment"
+        android:label="@string/favoritos"
+        tools:layout="@layout/fragment_favoritos" />
+    <fragment
+        android:id="@+id/myCartFragment"
+        android:name="com.example.foodupiicsa.ui.MyCartFragment"
+        android:label="@string/my_cart"
+        tools:layout="@layout/fragment_my_cart" />
+</navigation>
