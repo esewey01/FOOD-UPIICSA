@@ -8,12 +8,14 @@
     tools:context=".activities.LoginActivity">
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/fondologin"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:contentDescription="@string/imagenfondo"
         android:foreground="@drawable/foreground_design"
         android:scaleType="centerCrop"
         android:src="@drawable/comida"
+        tools:ignore="ImageContrastCheck"
         tools:layout_editor_absoluteX="80dp"
         tools:layout_editor_absoluteY="0dp" />
 
@@ -25,7 +27,7 @@
         android:text="@string/food_upiicsa"
         android:textAlignment="center"
         android:textColor="@color/white"
-        android:textSize="33sp"
+        android:textSize="50sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -47,50 +49,57 @@
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <EditText
-        android:textColor="@color/white"
-        android:id="@+id/editText"
+        android:id="@+id/etEmail"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
+        android:autofillHints="Introduce tu correo electrónico"
         android:backgroundTint="#CCCCCC"
         android:drawableStart="@drawable/usuario_icon"
         android:drawablePadding="15dp"
-        android:hint="@string/nombre_completo"
+        android:hint="@string/correo_electr_nico"
+        android:inputType="textEmailAddress"
+        android:minHeight="48dp"
+        android:textColor="@color/white"
         android:textColorHint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4"
-        app:layout_constraintWidth_percent=".8" />
+        app:layout_constraintWidth_percent=".8"
+        tools:ignore="VisualLintTextFieldSize" />
 
     <EditText
-        android:layout_marginTop="10dp"
-        android:id="@+id/editText2"
+        android:id="@+id/etPassword"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:autofillHints="Introduce tu contraseña"
         android:backgroundTint="#CCCCCC"
         android:drawableStart="@drawable/pokemon_icon"
         android:drawablePadding="15dp"
         android:hint="@string/contrase_a"
+        android:inputType="textPassword"
+        android:minHeight="48dp"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText"
+        app:layout_constraintTop_toBottomOf="@+id/etEmail"
         app:layout_constraintWidth_percent=".8" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btnLogin"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@drawable/btn_bg_design"
-        android:onClick="mainActivity"
         android:padding="14dp"
+        android:textColor="@color/white"
         android:text="@string/iniciar_sesi_n"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText2"
+        app:layout_constraintTop_toBottomOf="@+id/etPassword"
         app:layout_constraintVertical_bias="0.6"
         app:layout_constraintWidth_percent=".8" />
 
@@ -105,22 +114,22 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button2"
+        app:layout_constraintTop_toBottomOf="@+id/btnLogin"
         app:layout_constraintHorizontal_bias=".4"/>
 
     <TextView
-        android:onClick="registrer"
+        android:id="@+id/btnRegistrar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/registrate"
         android:textAlignment="center"
-        android:textColor="@color/vino"
+        android:textColor="#4DB6AC"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toEndOf="@+id/textView5"
-        app:layout_constraintTop_toBottomOf="@+id/button2" />
+        app:layout_constraintTop_toBottomOf="@+id/btnLogin" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

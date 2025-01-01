@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -9,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal">
-        dayle
+
         <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/detalles_img"
             android:layout_width="130dp"
@@ -24,7 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:layout_marginLeft="4dp">
+            android:layout_marginStart="4dp">
 
             <TextView
                 android:id="@+id/detalles_name"
@@ -33,7 +34,7 @@
                 android:fontFamily="sans-serif-condensed-medium"
                 android:maxLines="1"
                 android:singleLine="true"
-                android:text="Nombre"
+                android:text="@string/nombre"
                 android:textColor="@color/black"
                 android:textSize="24sp"
                 android:textStyle="bold"/>
@@ -43,7 +44,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif"
-                android:text="Descripción"
+                android:text="@string/descripci_n"
                 android:ellipsize="end"
                 android:maxLines="2"
                 android:textColor="@color/black"
@@ -59,19 +60,21 @@
                     android:layout_width="15dp"
                     android:layout_height="15dp"
                     android:src="@drawable/start"
+                    android:contentDescription="@string/star"
                     android:layout_marginTop="2dp"/>
 
                 <TextView
                     android:id="@+id/detalles_rating"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="5.0"
+                    android:text="@string/_5_0"
                     android:textStyle="bold" />
 
                 <ImageView
                     android:layout_width="15dp"
                     android:layout_height="15dp"
-                    android:layout_marginLeft="30dp"
+                    android:layout_marginStart="30dp"
+                    android:contentDescription="@string/time"
                     android:layout_marginTop="2dp"
                     android:src="@drawable/ic_baseline_access_time_24"/>
 
@@ -79,8 +82,8 @@
                     android:id="@+id/detalles_timing"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="4dp"
-                    android:text="10:00 - 7:00"
+                    android:layout_marginStart="4dp"
+                    android:text="@string/_10_00_7_00"
                     android:textStyle="bold"/>
             </LinearLayout>
 
@@ -92,29 +95,38 @@
                     android:id="@+id/imageView4"
                     android:layout_width="15dp"
                     android:layout_height="15dp"
+                    android:contentDescription="@string/precio"
                     android:src="@drawable/dollarsymbol"
-                    android:tint="@color/purple_500" />
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="@color/purple_500" />
 
                 <TextView
                     android:id="@+id/detalles_precio"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="120.0"
+                    android:text="@string/_120_0"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/imageView4"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <Button
+                    android:id="@+id/btn_add_to_cart"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginEnd="5dp"
                     android:fontFamily="sans-serif-condensed"
-                    android:text="Añadir al carrito"
+                    android:text="@string/a_adir_al_carrito"
+                    android:background="@drawable/btn_bg_design2"
                     android:textAllCaps="false"
                     android:textSize="10sp"
                     android:textStyle="bold"
-                    android:layout_marginRight="5dp"
-                    app:layout_constraintEnd_toEndOf="parent" />
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </LinearLayout>

@@ -6,9 +6,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
+    app:headerLayout="@layout/nav_header_main"
     tools:openDrawer="start">
 
     <include
+
         android:id="@+id/app_bar_main"
         layout="@layout/app_bar_main"
         android:layout_width="match_parent"
@@ -22,13 +24,15 @@
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header_main"
         app:menu="@menu/activity_main_drawer"
-        android:background="@color/black"
+        android:background="@color/mediumGray"
         app:itemIconTint="@color/white"
         app:itemTextColor="@color/white">
 
     <Button
+        android:id="@+id/btnCerrarSesion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/btn_bg_design"
         android:text="@string/cerrar_sesi_n"
         android:layout_gravity="bottom"
         android:textAllCaps="false"

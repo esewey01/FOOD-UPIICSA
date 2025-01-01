@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "601367257753",
-    "project_id": "database-proyecttitulacion",
-    "storage_bucket": "database-proyecttitulacion.firebasestorage.app"
+    "project_number": "438445439292",
+    "project_id": "uppicsafood",
+    "storage_bucket": "uppicsafood.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:601367257753:android:a8a69c1f4d74aceaccce08",
+        "mobilesdk_app_id": "1:438445439292:android:bb18dc6af9d24577ac4639",
         "android_client_info": {
           "package_name": "com.example.foodupiicsa"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyCwhLxZtb4w8Pl-J6gKv_iyacwlsYixZkE"
+          "current_key": "AIzaSyACnlXRqHpaT2ARcIiTWrxdy_JbUUZwWuM"
         }
       ],
       "services": {

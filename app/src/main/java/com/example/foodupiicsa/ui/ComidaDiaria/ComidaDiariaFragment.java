@@ -31,11 +31,11 @@ public class ComidaDiariaFragment extends Fragment {
 
         comidaDiariaModels=new ArrayList<>();
 
-        comidaDiariaModels.add(new ComidaDiariaModel(R.drawable.breakfast, "DESAYUNO","20%", "DESCRIPCIÓN","DESAYUNO"));
-        comidaDiariaModels.add(new ComidaDiariaModel(R.drawable.lunch, "ALMUERZO","10%", "DESCRIPCIÓN","ALMUERZO"));
-        comidaDiariaModels.add(new ComidaDiariaModel(R.drawable.dinner, "CENA","30%", "DESCRIPCIÓN","CENA"));
-        comidaDiariaModels.add(new ComidaDiariaModel(R.drawable.sweets, "DULCE","22%", "DESCRIPCIÓN","DULCE"));
-        comidaDiariaModels.add(new ComidaDiariaModel(R.drawable.coffe, "CAFFE","10%", "DESCRIPCIÓN","CAFFE"));
+        comidaDiariaModels.add(new ComidaDiariaModel(R.drawable.breakfast, "DESAYUNO","20%", "Energiza tu mañana con nuestro desayuno completo","DESAYUNO"));
+        comidaDiariaModels.add(new ComidaDiariaModel(R.drawable.lunch, "ALMUERZO","10%", "Opciones saludables y deliciosas para tu almuerzo","ALMUERZO"));
+        comidaDiariaModels.add(new ComidaDiariaModel(R.drawable.dinner, "CENA","30%", "Cena equilibrada para recargar energías","CENA"));
+        comidaDiariaModels.add(new ComidaDiariaModel(R.drawable.sweets, "DULCE","22%", "Satisface tu antojo dulce con nuestras delicias","DULCE"));
+        comidaDiariaModels.add(new ComidaDiariaModel(R.drawable.coffe, "CAFFE","10%", "El café perfecto para cualquier ocasión","CAFFE"));
 
 
         comidaDiariaAdapter=new ComidaDiariaAdapter(getContext(),comidaDiariaModels);

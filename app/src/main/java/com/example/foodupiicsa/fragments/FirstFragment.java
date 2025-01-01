@@ -3,64 +3,72 @@ package com.example.foodupiicsa.fragments;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.foodupiicsa.R;
+import com.example.foodupiicsa.activities.adapters.FeaturedAdapter;
+import com.example.foodupiicsa.activities.adapters.FeaturedVerAdapter;
+import com.example.foodupiicsa.activities.models.FeaturedModel;
+import com.example.foodupiicsa.activities.models.FeaturedVerModel;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link FirstFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.ArrayList;
+import java.util.List;
+
+
 public class FirstFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    /////////////////////////FEATURED HOR RECYCLERVIEW
+    List<FeaturedModel> featuredModelList;
+    RecyclerView recyclerView;
+    FeaturedAdapter featuredAdapter;
+
+    /////////////////////////FEATURED VER RECYCLERVIEW
+    List<FeaturedVerModel> featuredVerModelList;
+    RecyclerView recyclerView2;
+    FeaturedVerAdapter featuredVerAdapter;
+
+
 
     public FirstFragment() {
         // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment FirstFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static FirstFragment newInstance(String param1, String param2) {
-        FirstFragment fragment = new FirstFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_first, container, false);
+        View view = inflater.inflate(R.layout.fragment_first, container, false);
+
+        ////////////////////////////FEATURED HOR RECYCLERVIEW
+        recyclerView=view.findViewById(R.id.featured_hor_rec);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(),recyclerView.HORIZONTAL,false));
+        featuredModelList=new ArrayList<>();
+        featuredModelList.add(new FeaturedModel(R.drawable.fav1,"Featured 1", "Descripción 1"));
+        featuredModelList.add(new FeaturedModel(R.drawable.fav2,"Featured 2", "Descripción 1"));
+        featuredModelList.add(new FeaturedModel(R.drawable.fav3,"Featured 3", "Descripción 1"));
+
+        featuredAdapter=new FeaturedAdapter(featuredModelList);
+        recyclerView.setAdapter(featuredAdapter);
+
+        ////////////////////////////FEATURED VER RECYCLERVIEW
+        recyclerView2=view.findViewById(R.id.featured_ves_rec);
+        recyclerView2.setLayoutManager(new LinearLayoutManager(getContext(),recyclerView.VERTICAL,false));
+        featuredVerModelList=new ArrayList<>();
+
+        featuredVerModelList.add(new FeaturedVerModel(R.drawable.ver1,"Featured 1","Descripcion 1", "4.8","10 a 9"));
+        featuredVerModelList.add(new FeaturedVerModel(R.drawable.ver2,"Featured 2","Descripcion 1", "4.8","10 a 9"));
+        featuredVerModelList.add(new FeaturedVerModel(R.drawable.ver3,"Featured 3","Descripcion 1", "4.8","10 a 9"));
+        featuredVerModelList.add(new FeaturedVerModel(R.drawable.ver1,"Featured 1","Descripcion 1", "4.8","10 a 9"));
+        featuredVerModelList.add(new FeaturedVerModel(R.drawable.ver2,"Featured 2","Descripcion 1", "4.8","10 a 9"));
+        featuredVerModelList.add(new FeaturedVerModel(R.drawable.ver3,"Featured 3","Descripcion 1", "4.8","10 a 9"));
+        featuredVerAdapter=new FeaturedVerAdapter(featuredVerModelList);
+        recyclerView2.setAdapter(featuredVerAdapter);
+        return view;
     }
 }

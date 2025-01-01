@@ -10,12 +10,14 @@
 
     <!--IMAGEN DE FONDO QUE OCUPA TODA LA PANTALLA-->
     <ImageView
-        android:foreground="@drawable/foreground_design"
-        android:id="@+id/imageView2"
+        android:id="@+id/imagenfondo"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:contentDescription="@string/imagenfondo"
+        android:foreground="@drawable/foreground_design"
         android:scaleType="centerCrop"
-        android:src="@drawable/comida"/>
+        android:src="@drawable/comida"
+        tools:ignore="ImageContrastCheck" />
 
     <!-- Título principal de la aplicación -->
     <TextView
@@ -23,7 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/lobster"
-        android:text="@string/food_upiicsa"
+        android:text="@string/upiicsa_food"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="50sp"
@@ -37,7 +39,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/bienvenido2"
+        android:text="@string/bienvenido_3"
         android:textAlignment="center"
         android:textColor="#FBFBFB"
         android:textStyle="bold"
@@ -56,7 +58,9 @@
         android:background="@drawable/btn_bg_design"
         android:padding="14dp"
         android:onClick="registrer"
+        android:shadowColor="@color/vino"
         android:text="@string/registrate"
+        android:textColor="@color/white"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -68,19 +72,20 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+
+        android:onClick="login"
         android:text="@string/iniciar_sesi_n"
         android:textAlignment="center"
         android:textColor="#FBFBFB"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView2"
+        app:layout_constraintBottom_toBottomOf="@+id/imagenfondo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.832"
-        android:onClick="login"
-        />
+        tools:ignore="TouchTargetSizeCheck" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

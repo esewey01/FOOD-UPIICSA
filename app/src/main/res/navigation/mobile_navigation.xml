@@ -21,10 +21,10 @@
         android:id="@+id/nav_favoritos"
         android:name="com.example.foodupiicsa.ui.Favoritos.FavoritosFragment"
         android:label="@string/favoritos"
-        tools:layout="@layout/fragment_favoritos" />
+        tools:layout="@layout/fragment_favorito" />
     <fragment
         android:id="@+id/myCartFragment"
         android:name="com.example.foodupiicsa.ui.MyCartFragment"
-        android:label="@string/my_cart"
+        android:label="@string/mi_carrito"
         tools:layout="@layout/fragment_my_cart" />
 </navigation>

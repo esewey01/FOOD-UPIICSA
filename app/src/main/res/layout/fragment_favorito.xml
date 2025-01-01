@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:content=".ui.favorite.FavoriteFragment"
     >
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -17,6 +16,7 @@
             android:foreground="@drawable/foreground_design"
             android:scaleType="centerCrop"
             android:src="@drawable/fav1"
+            android:contentDescription="@string/imagenmuestra"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -26,7 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-condensed"
-            android:text="COMIDA DELICIOSA DESCRIPCIÓN DESCRIPCION"
+            android:text="@string/comida_deliciosa_descripci_n_descripcion"
             android:textColor="@color/white"
             android:textSize="25sp"
             android:textStyle="bold"
@@ -42,7 +42,7 @@
             android:layout_height="wrap_content"
             android:background="@color/white"
             android:padding="8dp"
-            android:text="VER MÁS"
+            android:text="@string/ver_m_s"
             android:textColor="@color/black"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -54,16 +54,17 @@
             android:layout_margin="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TU COMIDA FAVORITA SE ENCUENTRA AQUI"
+            android:text="@string/tu_comida_favorita_se_encuentra_aqui"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imagenfavorito" />
 
         <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tab"
+            android:id="@+id/tab_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:contentDescription="@string/navegaci_n_de_pesta_as"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imagenfavorito" />
@@ -74,7 +75,7 @@
             android:layout_width="match_parent"
             android:layout_height="450dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tab" />
+            app:layout_constraintTop_toBottomOf="@+id/tab_layout" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

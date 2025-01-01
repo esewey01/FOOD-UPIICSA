@@ -1,17 +1,20 @@
 package com.example.foodupiicsa.activities.models;
 
+import android.nfc.cardemulation.HostApduService;
+
 public class HomeVerModel {
     int image;
     String name;
     String timing;
-    String likes;
+    String rating;
     String price;
 
-    public HomeVerModel(String name, String likes, String timing, int image){
-        this.name = name;
-        this.likes = likes;
-        this.timing = timing;
+    public HomeVerModel(int image, String name, String timing, String rating, String price) {
         this.image = image;
+        this.name = name;
+        this.timing = timing;
+        this.rating = rating;
+        this.price = price;
     }
 
     public int getImage() {
@@ -38,12 +41,12 @@ public class HomeVerModel {
         this.timing = timing;
     }
 
-    public String getLikes() {
-        return likes;
+    public String getRating() {
+        return rating;
     }
 
-    public void setLikes(String likes) {
-        this.likes = likes;
+    public void setRating(String rating) {
+        this.rating = rating;
     }
 
     public String getPrice() {
@@ -52,5 +55,17 @@ public class HomeVerModel {
 
     public void setPrice(String price) {
         this.price = price;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if(obj == null || getClass() != obj.getClass()) return false;
+        HomeVerModel that = (HomeVerModel) obj;
+        return name.equals(that.name);
+    }
+    @Override
+    public int hashCode() {
+        return name.hashCode();
     }
 }
