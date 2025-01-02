@@ -27,6 +27,11 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
         //INICIALIZAR FIREBASE
         auth = FirebaseAuth.getInstance()
+        // Verificar si ya hay sesión activa
+        if (isLoggedIn()) {
+            redirectToMain()
+            return
+        }
 
         //AJUSTAR INSETS PARA EL DISEÑO DE LA PANTALLA
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
@@ -47,6 +52,25 @@ class LoginActivity : AppCompatActivity() {
         }
 
     }
+    private fun isLoggedIn(): Boolean {
+        val currentUser = auth.currentUser
+        val sharedPreferences = getSharedPreferences("UserSession", MODE_PRIVATE)
+        return currentUser != null && sharedPreferences.getBoolean("isLoggedIn", false)
+    }
+
+    private fun redirectToMain() {
+        startActivity(Intent(this, MainActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        })
+        finish()
+    }
+    override fun onStart() {
+        super.onStart()
+        if (isLoggedIn()) {
+            redirectToMain()
+        }
+    }
+
 
     //FUNCION PARA INICIAR SESIÓN
     private fun loginUser(){
@@ -76,19 +100,27 @@ class LoginActivity : AppCompatActivity() {
         }
 
         //INICIAR SESIÓN CON FIREBASE
-        auth.signInWithEmailAndPassword(email, password)
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    // Redirigir al MainActivity si el inicio de sesión es exitoso
-                    Toast.makeText(this, "Inicio de sesión exitoso", Toast.LENGTH_SHORT).show()
+        auth.signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                val user = auth.currentUser
+                if (user != null) {
+                    // Guardar estado de sesión
+                    val sharedPreferences = getSharedPreferences("UserSession", MODE_PRIVATE)
+                    val editor = sharedPreferences.edit()
+                    editor.putBoolean("isLoggedIn", true)
+                    editor.apply()
+
+                    // Redirigir al MainActivity
                     val intent = Intent(this, MainActivity::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                     startActivity(intent)
+                    finish()
                 } else {
-                    // Mostrar error si no se puede iniciar sesión
-                    Toast.makeText(this, "Error: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Error al obtener usuario", Toast.LENGTH_SHORT).show()
                 }
+            } else {
+                Toast.makeText(this, "Inicio de sesión fallido", Toast.LENGTH_SHORT).show()
             }
+        }
 
     }
 

@@ -1,6 +1,4 @@
-package com.example.foodupiicsa.activities.adapters;
-
-import java.util.List;
+package com.example.foodupiicsa.activities.models;
 
 public class Order {
     private String name;
@@ -11,10 +9,9 @@ public class Order {
         // Constructor vacío requerido por Firebase
     }
 
-    public Order(String name, String price, String rating) {
+    public Order(String name, String price) {
         this.name = name;
         this.price = price;
-        this.rating = rating;
     }
 
     public String getName() {

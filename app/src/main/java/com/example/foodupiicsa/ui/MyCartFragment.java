@@ -66,21 +66,20 @@ public class MyCartFragment extends Fragment {
 
 
         //CONFIGURAR DESLIZAR PARA ELIMINAR
-        ItemTouchHelper itemTouchHelper=new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT) {
+        ItemTouchHelper itemTouchHelper=new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.RIGHT) {
             @Override
-            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
-                return false;//NO SE PERMITE MOVER ELEMENTOS
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                return false;
             }
 
             @Override
-            public void onSwiped( RecyclerView.ViewHolder viewHolder, int direction) {
-                int position=viewHolder.getAdapterPosition();
-                //ELIMINAR EL PRODUCTO DE LA LISTA
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                int position = viewHolder.getAdapterPosition();
                 cartItems.remove(position);
                 cartAdapter.notifyItemRemoved(position);
-
+                CarritoFunciones.getInstance().clearCart(); // Actualizar el carrito global
                 actualizarPrecioTotal(cartItems);
-                Log.d("MyCartFragment", "Producto eliminado de la lista."+position);
+                Toast.makeText(getContext(), "Producto eliminado", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -92,11 +91,16 @@ public class MyCartFragment extends Fragment {
         Button buttonOrd = view.findViewById(R.id.buttonOrdenar);
 
         buttonOrd.setOnClickListener(v->{
-            for (CartModel item : cartItems) {
-                Log.d("MyCartFragment", "Producto: " + item.getName() + ", Precio: $" + item.getPrice());
+            if (cartItems.isEmpty()){
+                for (CartModel item : cartItems) {
+                    Log.d("MyCartFragment", "Producto: " + item.getName() + ", Precio: $" + item.getPrice());
+                }
+                Toast.makeText(getContext(), "Solicitud enviada", Toast.LENGTH_SHORT).show();
+                enviarPedido(cartItems);
             }
-            Toast.makeText(getContext(), "Solicitud enviada", Toast.LENGTH_SHORT).show();
-            enviarPedido(cartItems);
+            else{
+                Toast.makeText(getContext(), "No hay productos en el carrito", Toast.LENGTH_SHORT).show();
+            }
         });
 
         //ACTUALIZAR EL PRECIO TOTAL

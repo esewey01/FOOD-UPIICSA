@@ -2,35 +2,57 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="@color/mediumGray"
-    android:padding="8dp">
+    android:background="@color/white"
+    android:padding="16dp"
+    android:elevation="4dp"
+    android:layout_margin="8dp"
+    android:radius="8dp">
 
+    <!-- Username -->
     <TextView
         android:id="@+id/usernameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Username"
-        android:textColor="@color/white"
-        android:textStyle="bold" />
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="4dp" />
 
+    <!-- Email -->
     <TextView
         android:id="@+id/emailTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        android:text="Email" />
+        android:text="Email"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:layout_marginBottom="4dp" />
 
+    <!-- Boleta -->
     <TextView
         android:id="@+id/boletaTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        android:text="Boleta" />
+        android:text="Boleta"
+        android:textColor="@color/vino"
+        android:textSize="16sp"
+        android:layout_marginBottom="8dp" />
 
+    <!-- Separator -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/vino"
+        android:layout_marginBottom="8dp" />
+
+    <!-- Orders -->
     <TextView
         android:id="@+id/ordersTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        android:text="Orders" />
+        android:text="Orders"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="italic" />
 </LinearLayout>

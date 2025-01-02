@@ -6,8 +6,8 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_home"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="@string/menu_home" />
+            android:icon="@drawable/icon_diamane"
+            android:title="Promociones" />
         <item
             android:id="@+id/nav_comida_diaria"
             android:icon="@drawable/ic_menu_gallery"
@@ -15,11 +15,10 @@
         <item
             android:id="@+id/nav_favoritos"
             android:icon="@drawable/favorite_icon"
-            android:title="@string/favoritos" />
-
+            android:title="Recomendados" />
         <item
             android:id="@+id/myCartFragment"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="@string/mi_carrito" />
+            android:icon="@drawable/icon_solicitar"
+            android:title="Ordenar" />
     </group>
 </menu>

@@ -1,5 +1,7 @@
 package com.example.foodupiicsa.activities.adapters;
 
+import com.example.foodupiicsa.activities.models.Order;
+
 import java.util.List;
 
 // Modelo para los pedidos del usuario

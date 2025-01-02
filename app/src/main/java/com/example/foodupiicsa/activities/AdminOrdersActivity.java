@@ -1,7 +1,5 @@
 package com.example.foodupiicsa.activities;
 
-import static android.content.ContentValues.TAG;
-
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
@@ -11,7 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.foodupiicsa.R;
-import com.example.foodupiicsa.activities.adapters.Order;
+import com.example.foodupiicsa.activities.models.Order;
 import com.example.foodupiicsa.activities.adapters.OrdersAdapter;
 import com.example.foodupiicsa.activities.adapters.UserOrder;
 import com.google.firebase.database.DataSnapshot;
@@ -30,82 +28,109 @@ public class AdminOrdersActivity extends AppCompatActivity {
     private RecyclerView orderRecyclerView;
     private OrdersAdapter ordersAdapter;
     private DatabaseReference ordersDatabase;
+    private DatabaseReference usersDatabase;
 
 
-
-
-    @Override protected void onCreate(Bundle savedInstanceState) {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_orders);
 
+        Log.d(TAG,"Iniciando AdminOrdersActivity");
+
+        //RECYCLERVIEW
         orderRecyclerView = findViewById(R.id.orderRecyclerView);
         orderRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         ordersAdapter = new OrdersAdapter();
         orderRecyclerView.setAdapter(ordersAdapter);
 
-        ordersDatabase = FirebaseDatabase.getInstance().getReference("orders");
+        //OBTENER REFERENCIAS A FIREBASE
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        Log.d(TAG,"Iniciando referencias de Firebase");
+        ordersDatabase = database.getReference("Ordenes");
+        usersDatabase = database.getReference("users");
 
-        //REFERENCIA A FIREBASE
-        ordersDatabase.addValueEventListener(new ValueEventListener() {
+        loadOrders();
+    }
 
+    private void loadOrders(){
+        Log.d(TAG,"Iniciando carga de órdenes");
+        usersDatabase.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot snapshot) {
+            public void onDataChange(DataSnapshot usersSnapshot) {
                 List<UserOrder> userOrders = new ArrayList<>();
-                Log.d(TAG, "DATOS CARGADOS DESDE FIREABSE" + snapshot.getKey());
+                Log.d(TAG, "Número total de usuarios: " + usersSnapshot.getChildrenCount());
 
-                for (DataSnapshot userSnapshot : snapshot.getChildren()) {
-                    Log.d(TAG, "Usuario: " + userSnapshot.getKey());
-
-                    String username = userSnapshot.child("username").getValue(String.class);
-                    String email = userSnapshot.child("email").getValue(String.class);
-                    String boleta = userSnapshot.child("boleta").getValue(String.class);
-
-                    if (username == null || email == null || boleta == null) {
-                        Log.e(TAG, "Valores nulos encontrados en los datos del usuario");
-                        Log.w(TAG, "Datos de usuario incompletos: username=" + username + ", email=" + email + ", boleta=" + boleta);
-                        continue;
+                for(DataSnapshot userSnapshot:usersSnapshot.getChildren()){
+                    String userId=userSnapshot.getKey();
+                    String username=userSnapshot.child("username").getValue(String.class);
+                    String email=userSnapshot.child("email").getValue(String.class);
+                    String boleta=userSnapshot.child("boleta").getValue(String.class);
+                    if (username != null && email != null && boleta != null) {
+                        Log.d(TAG,"PEDIDO AGREGADO: "+username+" con id:"+userId);
+                        loadUserOrders(userId,username,email,boleta,userOrders);
+                    }else{
+                        Log.d(TAG, "DATOS DE PEDIDOS INCOMPLETOS"+userId);
                     }
-
-                    Log.d(TAG, "Usuario encontrado: username=" + username + ", email=" + email + ", boleta=" + boleta);
-
-                    List<Order> orders = new ArrayList<>();
-
-                    for (DataSnapshot orderSnapshot : userSnapshot.getChildren()) {
-                        Log.d(TAG, "Procesando nodo de pedido: " + orderSnapshot.getKey());
-                        // Asegúrate de verificar nodos válidos
-                        if (orderSnapshot.hasChild("price") && orderSnapshot.hasChild("rating")) {
-                            String name = orderSnapshot.getKey(); // ID o nombre del pedido
-                            String price = orderSnapshot.child("price").getValue(String.class);
-                            String rating = orderSnapshot.child("rating").getValue(String.class);
-                            orders.add(new Order(name, price, rating));
-
-                            if (price != null && rating != null) {
-                                orders.add(new Order(name, price, rating));
-                                Log.d(TAG, "Pedido agregado: name=" + name + ", price=" + price + ", rating=" + rating);
-                            } else {
-                                Log.w(TAG, "Pedido con datos incompletos: name=" + name + ", price=" + price + ", rating=" + rating);
-                            }
-                        } else {
-                            Log.w(TAG, "Nodo de pedido no válido: " + orderSnapshot.getKey());
-                        }
-
-
-                        // Agregar usuario con pedidos a la lista
-                        userOrders.add(new UserOrder(username, email, boleta, orders));
-                        Log.d(TAG, "Usuario con pedidos agregado a la lista: " + username);
-                    }
-                    // Actualizar el adaptador con la lista procesada
-                    ordersAdapter.setUserOrders(userOrders);
-                    Log.d(TAG, "Adaptador actualizado con " + userOrders.size() + " usuarios.");
                 }
+        }
+        @Override
+            public  void onCancelled(DatabaseError error){
+                Log.e(TAG,"Error al cargar los pedidos"+ error.getMessage());
+                Toast.makeText(AdminOrdersActivity.this,"Error al cargar los pedidos",Toast.LENGTH_SHORT).show();
             }
-            @Override
-            public void onCancelled(DatabaseError error) {
-                Log.e(TAG, "Error al cargar los pedidos: " + error.getMessage(), error.toException());
-                Toast.makeText(AdminOrdersActivity.this, "Error al cargar los pedidos", Toast.LENGTH_SHORT).show();
-            }
-
         });
     }
 
+    private void loadUserOrders(
+            String userId,
+            String username,
+            String email,
+            String boleta,
+            List<UserOrder> userOrders
+    )
+    {
+        Log.d(TAG,"Cargando órdenes del usuario: "+username);
+        ordersDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot ordersSnapshot) {
+                List<Order> orders = new ArrayList<>();
+                Log.d(TAG,"Número total de pedidos: "+ordersSnapshot.getChildrenCount());
+
+                for (DataSnapshot orderGroupSnapshot : ordersSnapshot.getChildren()) {
+                    Log.d(TAG, "Procesando grupo de orden: " + orderGroupSnapshot.getKey());
+                    DataSnapshot orderSnapshot = orderGroupSnapshot.child("0");
+                    if(orderSnapshot.exists()){
+                        String name = orderSnapshot.child("name").getValue(String.class);
+                        String price = orderSnapshot.child("price").getValue(String.class);
+
+                        Log.e(TAG,"ORDEN ENCONTRADA: "+name);
+
+                        if (name != null && price  != null) {
+                            orders.add(new Order(name,price));
+                            Log.d(TAG,"PEDIDO AGREGADO: "+name);
+                        }else{
+                            Log.d(TAG,"DATOS DE PEDIDO INCOMPLETOS"+orderSnapshot.getKey());
+                        }
+
+                    }
+                }
+                if(!orders.isEmpty()){
+                    userOrders.add(new UserOrder(username,email,boleta,orders));
+                    ordersAdapter.setUserOrders(userOrders);
+                    Log.d(TAG, "PEDIDOS CARGADOS para " + username + ": " + orders.size() + " pedidos");
+                } else {
+                    Log.d(TAG, "No se encontraron pedidos para: " + username);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                Log.e(TAG,"Error al cargar los pedidos"+ error.getMessage());
+                Toast.makeText(AdminOrdersActivity.this,"Error al cargar los pedidos",Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 }
+
+
